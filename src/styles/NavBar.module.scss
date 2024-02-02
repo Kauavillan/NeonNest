@@ -1,0 +1,38 @@
+@import "_variables";
+@import "_functions";
+.navbar {
+  @include setDisplayFlex(row, space-between, center);
+  position: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(3px);
+  background-color: $darkBlue;
+  z-index: 5;
+  width: 100vw;
+  transition: 0.3s ease-in-out;
+  ul {
+    @include setDisplayFlex(row, space-between, center);
+    list-style: none;
+    width: 100%;
+    padding: 5px 4%;
+  }
+  a,
+  a:active,
+  a:visited {
+    color: $white;
+    font-style: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-family: $default;
+    text-decoration: none;
+    transition: 0.5s ease-in-out;
+    &:hover {
+      color: $pink;
+    }
+  }
+}
+.hide {
+  transform: translateY(-200px);
+  visibility: none;
+}

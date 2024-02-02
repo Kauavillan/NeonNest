@@ -1,0 +1,50 @@
+@import "_variables";
+@import "_functions";
+$mainColor: $blueishGreen;
+$boxMargin: 10px 20px;
+.spm {
+  padding-bottom: 20px;
+  margin-top: 25px;
+  width: 100%;
+  border: 2px solid $mainColor;
+
+  div:first-child {
+    margin: $boxMargin;
+    @include setDisplayFlex(row, space-between, center);
+  }
+  div:nth-child(2) {
+    border-top: 1px solid $mainColor;
+    margin: $boxMargin;
+    @include setDisplayFlex(row, space-between, center);
+    p {
+      margin-top: 10px;
+      @include setDisplayFlex(column);
+      span {
+        font-size: 0.75em;
+      }
+    }
+  }
+  span {
+    color: $mainColor;
+  }
+
+  svg {
+    margin: 0 10px;
+  }
+  span svg {
+    transform: translateY(5px);
+  }
+  button {
+    border: 2px solid $mainColor;
+    padding: 5px;
+    font-size: 1em;
+    background-color: transparent;
+    color: $mainColor;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      color: $darkGrey;
+      background-color: $mainColor;
+    }
+  }
+}

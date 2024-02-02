@@ -1,0 +1,50 @@
+@import "_variables";
+@import "_functions";
+.main {
+  padding-top: $marginFromTop;
+  margin: 30px 5% 0 5%;
+}
+.buy {
+  @include setDisplayFlex(row);
+}
+.prodMain {
+  font-family: $default;
+  font-size: 1.5em;
+}
+.desc {
+  font-size: 1.1em;
+  margin-top: 50px;
+  padding-bottom: 40px;
+
+  h3 {
+    font-size: 1.7em;
+    margin-bottom: 20px;
+  }
+
+  ol,
+  ul {
+    margin: 10px 0 10px 1.1em;
+  }
+
+  li::marker {
+    color: $pink;
+  }
+
+  ol,
+  ul,
+  p {
+    line-height: 1.4em;
+  }
+
+  strong {
+    color: $lightGreen;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .buy {
+    flex-direction: column;
+  }
+  .desc {
+    margin-top: 30px;
+  }
+}

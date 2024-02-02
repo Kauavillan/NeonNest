@@ -1,0 +1,37 @@
+// Colors
+
+$lightGreen: #00ff9f;
+$blueishGreen: #00ffee;
+$lightBlue: #0abdc6;
+$marineBlue: #133e7c;
+$darkBlue: #091833;
+$darkBlueBlur: #1732654e;
+$purple: #711c91;
+$pink: #ea00d9;
+$darkGrey: #171717;
+$white: #fff;
+$black: #000;
+
+// Fonts
+
+@font-face {
+  font-family: "Space-Monkey";
+  src: url(../../public/fonts/SpaceMonkeyBold.otf) format("opentype");
+}
+@font-face {
+  font-family: "Glitch";
+  src: url(../../public/fonts/Sdglitch.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Default";
+  src: url(../../public/fonts/TechnoCharm.otf) format("opentype");
+}
+
+$spaceMonkey: "Space-Monkey", "Default", "Sans serif";
+$glitch: "Glitch";
+$default: "Default";
+
+// Sizes
+
+$max-width-sm: 800px;
+$marginFromTop: 70px;

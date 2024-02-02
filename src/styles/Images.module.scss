@@ -1,0 +1,41 @@
+@import "_functions";
+@import "_variables";
+.images {
+  @include setDisplayFlex();
+}
+.images div:first-child {
+  @include setDisplayFlex(column, normal, center);
+  img:not(:first-child) {
+    margin-top: 20px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+.mainImage {
+  margin-left: 30px;
+  width: 35vw;
+  height: 100%;
+  overflow: hidden;
+}
+.mainImage img {
+  margin: 0;
+  width: 35vw;
+  height: 100%;
+
+  &:hover:not(.zoomed) {
+    cursor: zoom-in;
+  }
+}
+.zoomed {
+  cursor: zoom-out;
+}
+.slideItem {
+  width: 100%;
+}
+.swiper div::after {
+  color: $white;
+}
+.swiper span {
+  background-color: $white;
+}

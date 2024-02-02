@@ -1,0 +1,34 @@
+@import "_variables";
+@import "_functions";
+$skew: 20deg;
+.but {
+  background-color: transparent;
+  position: relative;
+  color: $lightGreen;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 15px 0;
+  transform: skewX(-$skew);
+  transition: 0.2s ease-in-out;
+  div {
+    transform: skewX($skew);
+  }
+  &:hover {
+    transform: skewX(0);
+    background-color: $lightGreen;
+    div {
+      transform: skewX(0);
+    }
+  }
+  svg {
+    margin-left: 10px;
+    transform: translateY(4px);
+  }
+}
+.pink {
+  @include setColors($pink);
+}
+.blue {
+  @include setColors($lightBlue);
+}

@@ -1,0 +1,33 @@
+@import "_variables";
+@import "_functions";
+.buy {
+  margin-left: 10vw;
+  h1 {
+    font-size: 2em;
+  }
+  .price {
+    @include setDisplayFlex(column);
+    #discount {
+      color: $pink;
+    }
+    #price {
+      letter-spacing: 2px;
+      font-size: 2em;
+      color: $lightGreen;
+    }
+    span:last-child {
+      color: $lightGreen;
+    }
+  }
+  .buttons {
+    @include setDisplayFlex(column);
+    button:first-child {
+      margin: 20px 0;
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .buy {
+    margin: 20px auto 0 auto;
+  }
+}

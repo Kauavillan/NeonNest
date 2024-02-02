@@ -1,0 +1,14 @@
+@import "_variables";
+@import "_functions";
+$spaceMonkey: "Space-Monkey", "Default", "Sans serif";
+$glitch: "Glitch";
+$default: "Default";
+
+.prod_area {
+  @include setDisplayFlex(row, center, stretch);
+  flex-wrap: wrap;
+  & > a,
+  > div {
+    min-width: 300px;
+  }
+}
