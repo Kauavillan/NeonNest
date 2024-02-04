@@ -12,3 +12,12 @@ $default: "Default";
     min-width: 300px;
   }
 }
+.skeleton > span {
+  @include setDisplayFlex(row, center);
+  flex-wrap: wrap;
+}
+.skelProd {
+  margin: 30px;
+  width: 20vw;
+  height: 250px;
+}

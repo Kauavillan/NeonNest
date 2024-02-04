@@ -17,6 +17,8 @@
     color: $white;
     font-size: 2em;
     font-family: "Chakra Petch", sans-serif;
+    min-width: 100px;
+    min-height: 20px;
   }
 }
 
@@ -26,4 +28,8 @@
   bottom: 0;
   height: auto;
   width: 700px;
+}
+.size {
+  width: 200px;
+  height: 500px;
 }

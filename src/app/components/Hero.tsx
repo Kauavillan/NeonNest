@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Person from "../../../public/images/Hero_Person.png";
 import styles from "../../styles/Hero.module.scss";
+
 export default function Hero() {
   return (
     <div className={styles.hero} id="hero">

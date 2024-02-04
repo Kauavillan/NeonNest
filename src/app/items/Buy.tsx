@@ -6,11 +6,12 @@ import Button from "./Button";
 import { FaCartPlus, FaCartShopping } from "react-icons/fa6";
 import Shipment from "./Shipment";
 interface Props {
+  id: number;
   title: string;
   price: number;
   discount?: number;
 }
-export default function Buy({ title, price, discount }: Props) {
+export default function Buy({ id, title, price, discount }: Props) {
   if (discount) {
     var afterPrice: number = Number(price) - (Number(price) * discount) / 100;
     afterPrice = Number(afterPrice.toFixed(2));
@@ -32,7 +33,7 @@ export default function Buy({ title, price, discount }: Props) {
       </div>
       <div className={styles.buttons}>
         <Button text="Buy Now" Icon={FaCartShopping} color={"blue"} />
-        <Button text="Add to Cart" Icon={FaCartPlus} color={"pink"} />
+        <Button id={id} text="Add to Cart" Icon={FaCartPlus} color={"pink"} />
       </div>
       <Shipment />
     </div>

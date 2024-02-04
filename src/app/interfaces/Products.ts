@@ -6,6 +6,7 @@ export interface IProduct {
   description: string;
   category: string;
   images: string[];
+  qtd?: number;
   rating: {
     rate: number;
     count: number;

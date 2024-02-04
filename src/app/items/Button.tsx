@@ -1,18 +1,40 @@
 import { IconType } from "react-icons";
 import styles from "../../styles/Button.module.scss";
-import { Children } from "react";
+import { useEffect } from "react";
+import { useCartProductsContext } from "../contexts/CartProductsContext";
 interface Props {
+  id?: number;
   text: string;
   Icon?: React.ElementType;
   color: string;
 }
-export default function Button({ text, Icon, color }: Props) {
+
+export default function Button({ id, text, Icon, color }: Props) {
+  const { cartProducts, handleCartClick } = useCartProductsContext();
+  useEffect(() => {
+    console.log(cartProducts);
+  }, [cartProducts]);
+
   return (
-    <button className={`${styles.but} ${styles[color]}`}>
-      <div>
-        {text}
-        {Icon && <Icon />}
-      </div>
-    </button>
+    <>
+      {id !== undefined ? (
+        <button
+          className={`${styles.but} ${styles[color]}`}
+          onClick={() => handleCartClick(id)}
+        >
+          <div>
+            {text}
+            {Icon && <Icon />}
+          </div>
+        </button>
+      ) : (
+        <button className={`${styles.but} ${styles[color]}`}>
+          <div>
+            {text}
+            {Icon && <Icon />}
+          </div>
+        </button>
+      )}
+    </>
   );
 }

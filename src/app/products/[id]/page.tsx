@@ -4,33 +4,25 @@ import Images from "@/app/items/Images";
 import { useState, useEffect } from "react";
 import styles from "../../../styles/InnerProduct.module.scss";
 import Buy from "@/app/items/Buy";
+import { useAllProductsContext } from "@/app/contexts/AllProductsContext";
 export default function ProductDetail({ params }: { params: { id: string } }) {
   const [product, setProduct] = useState<IProduct | null>(null);
-  const getProduct = async () => {
-    try {
-      await fetch("/products.json", {
-        method: "GET",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setProduct(data[params.id]);
-        });
-    } catch (e: any) {
-      console.log("Error: ", e);
-    }
-  };
+  const [active, setActive] = useState<boolean>(false);
+  const prods = useAllProductsContext();
   useEffect(() => {
-    getProduct();
-  }, []);
-
+    if (prods) {
+      setProduct(prods[Number(params.id)]);
+      setActive(true);
+    }
+  }, [prods]);
   return (
     <div className={styles.main}>
       <div className={styles.buy}>
         {product && <Images images={product.images} />}
-
         <div className={styles.prodMain}>
           {product && (
             <Buy
+              id={product.id}
               title={product.title}
               price={product.price}
               discount={product.discount}
