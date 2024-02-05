@@ -23,9 +23,16 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
 
   const [allProducts, setAllProducts] = useState<IProduct[] | null>(null);
   const prods = useAllProductsContext();
-
+  const quantities = {
+    qtd: 0,
+  };
   useEffect(() => {
-    setAllProducts(prods);
+    if (prods) {
+      const qtdProds = prods.map((prod) => {
+        return Object.assign(prod, quantities);
+      });
+      setAllProducts(qtdProds);
+    }
   }, [prods]);
   const setIntoCart = (id: number) => {
     if (allProducts !== null) {
