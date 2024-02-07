@@ -1,15 +1,17 @@
 "use client";
-import { useContext } from "react";
+import { useEffect } from "react";
 import styles from "../../styles/Cart.module.scss";
 import { useCartProductsContext } from "../contexts/CartProductsContext";
-import Image from "next/image";
 import CartProduct from "../items/CartProduct";
+import Loading from "../items/Loading";
 export default function Cart() {
   const { cartProducts, handleCartAdd } = useCartProductsContext();
-  console.log(cartProducts);
+
   return (
     <main className={styles.cart}>
-      {!cartProducts ? (
+      {cartProducts === undefined ? (
+        <Loading />
+      ) : cartProducts === null ? (
         <div>
           <h3>
             There's nothing in your cart now. Go shopping and be prepared to the

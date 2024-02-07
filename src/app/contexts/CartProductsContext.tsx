@@ -11,7 +11,7 @@ import { useAllProductsContext } from "./AllProductsContext";
 import { ICartProduct } from "../interfaces/CartProducts";
 
 interface CartContextProps {
-  cartProducts: ICartProduct[] | null;
+  cartProducts: ICartProduct[] | null | undefined;
   handleCartAdd: (id: number) => void;
 }
 
@@ -19,7 +19,9 @@ export const CartProductsContext = createContext<CartContextProps | null>(null);
 
 const CartProductsProvider = ({ children }: { children: ReactNode }) => {
   const [usedIds, setusedIds] = useState<number[] | null>(null);
-  const [cartProducts, setCartProducts] = useState<ICartProduct[] | null>(null);
+  const [cartProducts, setCartProducts] = useState<
+    ICartProduct[] | null | undefined
+  >(undefined);
   const [allProducts, setAllProducts] = useState<ICartProduct[] | null>(null);
   const [freeIds, setFreeIds] = useState<boolean>(false);
 
@@ -34,7 +36,7 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
       allProducts[id].qtd! += 1;
       cartProducts === null
         ? setCartProducts([allProducts[id]])
-        : setCartProducts([...cartProducts, allProducts[id]]);
+        : setCartProducts([...cartProducts!, allProducts[id]]);
     }
   };
 
@@ -47,6 +49,8 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
         idArr.push(e.id);
       });
       setusedIds(idArr);
+    } else {
+      setCartProducts(null);
     }
   }, []);
 
@@ -62,13 +66,16 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
   }, [prods]);
 
   useEffect(() => {
-    if (cartProducts !== null && cartProducts.length > 0) {
+    if (
+      cartProducts !== null &&
+      cartProducts !== undefined &&
+      cartProducts.length > 0
+    ) {
       localStorage.setItem("cartData", JSON.stringify(cartProducts));
     }
   }, [cartProducts]);
 
   useEffect(() => {
-    console.log(usedIds);
     if (usedIds && freeIds) setIntoCart(usedIds[usedIds.length - 1]);
     if (!freeIds) setFreeIds(true);
   }, [usedIds]);
@@ -82,10 +89,7 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
     let curPos: number | undefined = usedIds?.indexOf(id);
     if (curPos !== undefined && curPos !== -1) {
       if (cartProducts !== null) {
-        console.log(usedIds);
-        console.log(curPos);
-        cartProducts[curPos].qtd! += 1;
-        console.log(cartProducts[curPos]);
+        cartProducts![curPos].qtd! += 1;
         localStorage.setItem("cartData", JSON.stringify(cartProducts));
       }
     } else {

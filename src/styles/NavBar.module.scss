@@ -10,11 +10,30 @@
   z-index: 5;
   width: 100vw;
   transition: 0.3s ease-in-out;
+  svg {
+    width: 25px;
+    height: 25px;
+    transition: fade 0.3s ease-in-out;
+  }
+
   ul {
     @include setDisplayFlex(row, space-between, center);
     list-style: none;
     width: 100%;
     padding: 5px 4%;
+  }
+  a div {
+    @include setDisplayFlex(column, center, center);
+    width: 20px;
+    height: 20px;
+    background-color: $pink;
+    border-radius: 50%;
+    position: relative;
+    top: 5px;
+    right: -12px;
+  }
+  a span {
+    color: $darkGrey;
   }
   a,
   a:active,

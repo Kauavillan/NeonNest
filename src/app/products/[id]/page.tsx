@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import styles from "../../../styles/InnerProduct.module.scss";
 import Buy from "@/app/items/Buy";
 import { useAllProductsContext } from "@/app/contexts/AllProductsContext";
-import Link from "next/link";
 import Image from "next/image";
+import Loading from "@/app/items/Loading";
 export default function ProductDetail({ params }: { params: { id: string } }) {
   const [product, setProduct] = useState<IProduct | null | undefined>(null);
   const prods = useAllProductsContext();
@@ -23,16 +23,19 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
           {product ? (
             <div className={styles.main}>
               <div className={styles.buy}>
-                {product && <Images images={product.images} />}
+                {typeof product.images === "string" ? (
+                  <Images images={[product.images]} />
+                ) : (
+                  <Images images={product.images} />
+                )}
+
                 <div className={styles.prodMain}>
-                  {product && (
-                    <Buy
-                      id={product.id}
-                      title={product.title}
-                      price={product.price}
-                      discount={product.discount}
-                    />
-                  )}
+                  <Buy
+                    id={product.id}
+                    title={product.title}
+                    price={product.price}
+                    discount={product.discount}
+                  />
                 </div>
               </div>
               <div className={styles.desc}>
@@ -45,15 +48,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
               </div>
             </div>
           ) : (
-            <div className={styles.loading}>
-              <p>Loading...</p>
-              <Image
-                src="/images/loading_product.svg"
-                width={150}
-                height={150}
-                alt="Loading gif"
-              />
-            </div>
+            <Loading />
           )}
         </>
       ) : (
@@ -67,6 +62,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
             width={400}
             height={300}
             alt="police gif"
+            loading="lazy"
           />
         </div>
       )}

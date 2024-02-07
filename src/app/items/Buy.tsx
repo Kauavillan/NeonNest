@@ -24,11 +24,11 @@ export default function Buy({ id, title, price, discount }: Props) {
       <div className={styles.price}>
         {discount ? (
           <>
-            <span id={styles.discount}>From {price} to:</span>
+            <span id={styles.discount}>From {price.toFixed(2)} to:</span>
             <span id={styles.price}>${afterPrice}</span>
           </>
         ) : (
-          <span id={styles.price}>${price}</span>
+          <span id={styles.price}>${price.toFixed(2)}</span>
         )}
       </div>
       <div className={styles.buttons}>

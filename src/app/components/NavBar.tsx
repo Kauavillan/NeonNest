@@ -4,8 +4,10 @@ import { FaCartShopping } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useCartProductsContext } from "../contexts/CartProductsContext";
 export default function NavBar() {
   const [HeroVisible, SetHeroVisible] = useState<boolean>(true);
+  const { cartProducts, handleCartAdd } = useCartProductsContext();
   const isHeroSectionVisible = () => {
     const heroSection = document.getElementById("hero");
     if (heroSection) {
@@ -49,6 +51,11 @@ export default function NavBar() {
         </li>
         <li>
           <Link href={"/cart"}>
+            {cartProducts && cartProducts.length > 0 && (
+              <div>
+                <span>{cartProducts.length}</span>
+              </div>
+            )}
             <FaCartShopping />
           </Link>
         </li>
