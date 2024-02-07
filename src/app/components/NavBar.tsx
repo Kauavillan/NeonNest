@@ -48,7 +48,9 @@ export default function NavBar() {
           </Link>
         </li>
         <li>
-          <FaCartShopping />
+          <Link href={"/cart"}>
+            <FaCartShopping />
+          </Link>
         </li>
         <li>
           <IoSearch />

@@ -25,3 +25,8 @@
     color: $darkGrey;
   }
 }
+
+@mixin setSizes() {
+  padding-top: $marginFromTop;
+  margin: 30px 5% 0 5%;
+}

@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function Button({ id, text, Icon, color }: Props) {
-  const { cartProducts, handleCartClick } = useCartProductsContext();
+  const { cartProducts, handleCartAdd } = useCartProductsContext();
   useEffect(() => {
     console.log(cartProducts);
   }, [cartProducts]);
@@ -20,7 +20,7 @@ export default function Button({ id, text, Icon, color }: Props) {
       {id !== undefined ? (
         <button
           className={`${styles.but} ${styles[color]}`}
-          onClick={() => handleCartClick(id)}
+          onClick={() => handleCartAdd(id)}
         >
           <div>
             {text}
