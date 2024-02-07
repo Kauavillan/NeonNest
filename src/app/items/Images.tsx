@@ -71,7 +71,7 @@ export default function Images({ images }: Props) {
                 key={i}
                 src={image}
                 alt={"Product Image"}
-                width={175}
+                width={200}
                 height={150}
                 onMouseEnter={() => {
                   handleActive(i);
