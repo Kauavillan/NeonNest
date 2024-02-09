@@ -1,32 +1,30 @@
 import { FaTruck, FaMapMarkerAlt } from "react-icons/fa";
 import styles from "../../styles/Shipment.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useShipmentContext } from "../contexts/ShipmentContext";
 export default function Shipment() {
   const [shipmentTime, setShipmentTime] = useState<number | null>(null);
   const [shipmentFare, setShipmentFare] = useState<number | null>(null);
-  function createRandomNumber(min: number, max: number) {
-    const randNumber = Math.random();
-    return Math.floor(randNumber * (max - min + 1)) + min;
-  }
-  function handleShipment(): void {
-    if (shipmentTime === null) {
-      setShipmentTime(createRandomNumber(250, 300));
-      setShipmentFare(createRandomNumber(0, 100));
+  const ship = useShipmentContext();
+  useEffect(() => {
+    if (ship?.shipmentData) {
+      setShipmentFare(ship.shipmentData.price);
+      setShipmentTime(ship.shipmentData.time);
     }
-  }
+  }, [ship]);
   return (
     <div className={styles.spm}>
       <div>
         <span>
-          Check shipment
+          Shipment
           <FaTruck />
         </span>
 
-        <button onClick={() => handleShipment()}>
+        <button onClick={() => ship?.setShowShipmentTrue()}>
           Verify location <FaMapMarkerAlt />
         </button>
       </div>
-      {shipmentTime && (
+      {ship?.showShipment && (
         <div>
           <p>
             Standard shipment:{" "}
