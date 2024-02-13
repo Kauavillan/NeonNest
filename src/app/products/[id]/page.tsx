@@ -15,7 +15,6 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
       setProduct(prods[Number(params.id)]);
     }
   }, [prods]);
-
   return (
     <div>
       {product !== undefined ? (
@@ -34,6 +33,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
                     id={product.id}
                     title={product.title}
                     price={product.price}
+                    discountedPrice={product.discountedPrice}
                     discount={product.discount}
                   />
                 </div>

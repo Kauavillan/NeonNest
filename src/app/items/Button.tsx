@@ -11,10 +11,6 @@ interface Props {
 
 export default function Button({ id, text, Icon, color }: Props) {
   const { cartProducts, handleCartAdd } = useCartProductsContext();
-  useEffect(() => {
-    console.log(cartProducts);
-  }, [cartProducts]);
-
   return (
     <>
       {id !== undefined ? (

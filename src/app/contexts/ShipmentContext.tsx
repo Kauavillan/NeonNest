@@ -8,7 +8,7 @@ interface Shipment {
 interface ShipmentContext {
   shipmentData: Shipment | null;
   showShipment: boolean;
-  setShowShipmentTrue: () => void;
+  setShipmentFare: () => void;
 }
 export const ShipmentContext = createContext<ShipmentContext | null>(null);
 
@@ -35,19 +35,21 @@ export const ShipmentProvider = ({
     const shipment = sessionStorage.getItem("shipment");
     if (shipment) {
       setShipmentData(JSON.parse(shipment));
-    } else {
+      setShowShipment(true);
+    }
+  }, []);
+  function setShipmentFare() {
+    if (shipmentData === null) {
       const newShipment = createShipment();
       setShipmentData(newShipment);
       sessionStorage.setItem("shipment", JSON.stringify(newShipment));
+      setShowShipment(true);
     }
-  }, []);
-  function setShowShipmentTrue() {
-    setShowShipment(true);
   }
   const contextValue: ShipmentContext = {
     shipmentData,
     showShipment,
-    setShowShipmentTrue,
+    setShipmentFare,
   };
   return (
     <ShipmentContext.Provider value={contextValue}>

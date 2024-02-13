@@ -20,7 +20,7 @@ export default function Shipment() {
           <FaTruck />
         </span>
 
-        <button onClick={() => ship?.setShowShipmentTrue()}>
+        <button onClick={() => ship?.setShipmentFare()}>
           Verify location <FaMapMarkerAlt />
         </button>
       </div>

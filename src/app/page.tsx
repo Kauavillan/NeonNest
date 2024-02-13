@@ -32,6 +32,7 @@ export default function Home() {
               title={prod.title}
               price={prod.price}
               discount={prod.discount}
+              discountedPrice={prod.discountedPrice}
               description={prod.description}
               category={prod.category}
               images={prod.images}
