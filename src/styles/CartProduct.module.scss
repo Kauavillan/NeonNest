@@ -1,0 +1,56 @@
+@import "_variables";
+@import "_functions";
+
+.prod {
+  @include setDisplayFlex();
+  margin-bottom: 25px;
+  width: 50vw;
+  img:hover,
+  .details a:hover {
+    color: $lightBlue;
+  }
+  .details {
+    margin-left: 20px;
+    width: 100%;
+    @include setDisplayFlex(row, space-between, center);
+
+    a {
+      color: $white;
+      text-decoration: none;
+      transition: 0.3s ease-in-out;
+    }
+    h3 {
+      width: 45%;
+    }
+
+    div:last-child {
+      span {
+        font-size: 1.2em;
+      }
+    }
+  }
+
+  #discount {
+    span {
+      margin-right: 10px;
+    }
+  }
+  .qtd {
+    @include setDisplayFlex(row, center, center);
+
+    svg {
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+    p {
+      font-size: 1.2em;
+      margin: 0 10px;
+    }
+  }
+  .notMinus {
+    svg:first-child {
+      color: $lightGrey;
+      cursor: not-allowed;
+    }
+  }
+}

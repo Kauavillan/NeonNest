@@ -1,5 +1,39 @@
 @import "_variables";
 @import "_functions";
+
 .cart {
   @include setSizes();
+  .container {
+    @include setDisplayFlex(row, space-between);
+    .summary {
+      @include setDisplayFlex(column, normal, center);
+      width: 35vw;
+      h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+
+      .details {
+        text-align: center;
+        width: 80%;
+        margin-bottom: 10px;
+        div:first-child {
+          color: $lightBlue;
+        }
+        div span {
+          color: $pink;
+        }
+        & > span {
+          color: $lightGreen;
+        }
+      }
+      .total {
+        text-align: center;
+        span {
+          font-size: 2em;
+          color: $lightGreen;
+        }
+      }
+    }
+  }
 }
