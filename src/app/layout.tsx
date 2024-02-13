@@ -18,12 +18,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <WindowSizeProvider>
-          <CartProductsProvider>
-            <NavBar />
+          <ShipmentProvider>
             <ProductsProvider>
-              <ShipmentProvider>{children}</ShipmentProvider>
+              <CartProductsProvider>
+                <NavBar />
+                {children}
+              </CartProductsProvider>
             </ProductsProvider>
-          </CartProductsProvider>
+          </ShipmentProvider>
         </WindowSizeProvider>
       </body>
     </html>

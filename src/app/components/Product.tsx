@@ -4,22 +4,15 @@ import styles from "../../styles/Product.module.scss";
 import Link from "next/link";
 import "react-loading-skeleton/dist/skeleton.css";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { useState } from "react";
+
 export default function Product({
   id,
   title,
   price,
   discount,
   images,
+  discountedPrice,
 }: IProduct) {
-  if (discount) {
-    var afterPrice: number | string =
-      Number(price) - (Number(price) * discount) / 100;
-    afterPrice = afterPrice.toFixed(2);
-  } else {
-    var afterPrice: number | string = 0;
-  }
-
   return (
     <Link href={`../products/${id}`} className={styles.prodContainer}>
       <div key={id} className={styles.prod}>
@@ -44,7 +37,7 @@ export default function Product({
               <>
                 <span>${price.toFixed(2)}</span>
                 <div>
-                  <p>${afterPrice}</p>
+                  <p>${discountedPrice}</p>
                   <span> {discount}% off</span>
                 </div>
               </>

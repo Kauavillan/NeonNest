@@ -13,17 +13,19 @@ import { ICartProduct } from "../interfaces/CartProducts";
 interface CartContextProps {
   cartProducts: ICartProduct[] | null | undefined;
   handleCartAdd: (id: number) => void;
+  changeProdQtd: (id: number, qtd: number) => void;
 }
 
 export const CartProductsContext = createContext<CartContextProps | null>(null);
 
 const CartProductsProvider = ({ children }: { children: ReactNode }) => {
-  const [usedIds, setusedIds] = useState<number[] | null>(null);
+  const [usedIds, setUsedIds] = useState<number[] | null>(null);
   const [cartProducts, setCartProducts] = useState<
     ICartProduct[] | null | undefined
   >(undefined);
   const [allProducts, setAllProducts] = useState<ICartProduct[] | null>(null);
-  const [freeIds, setFreeIds] = useState<boolean>(false);
+
+  const [freeIds, setFreeIds] = useState<boolean>(false); // Prevents that usedIds add duplicated products to useState when getting products from localStorage
 
   const prods = useAllProductsContext();
 
@@ -48,7 +50,7 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
       JSON.parse(prevData).forEach((e: ICartProduct) => {
         idArr.push(e.id);
       });
-      setusedIds(idArr);
+      setUsedIds(idArr);
     } else {
       setCartProducts(null);
     }
@@ -58,7 +60,7 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
     if (prods) {
       const qtdProds = prods.map((prod) => {
         const { description, category, rating, ...rest } = prod;
-        rest.images = rest.images[0];
+        if (Array.isArray(rest.images)) rest.images = rest.images[0];
         return Object.assign(rest, quantities);
       });
       setAllProducts(qtdProds);
@@ -66,12 +68,9 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
   }, [prods]);
 
   useEffect(() => {
-    if (
-      cartProducts !== null &&
-      cartProducts !== undefined &&
-      cartProducts.length > 0
-    ) {
+    if (cartProducts && cartProducts.length > 0) {
       localStorage.setItem("cartData", JSON.stringify(cartProducts));
+      console.log(cartProducts);
     }
   }, [cartProducts]);
 
@@ -83,19 +82,44 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
   const contextValue: CartContextProps = {
     cartProducts,
     handleCartAdd,
+    changeProdQtd,
   };
 
-  function handleCartAdd(id: number) {
+  function findProductInArray(id: number): number | null {
     let curPos: number | undefined = usedIds?.indexOf(id);
     if (curPos !== undefined && curPos !== -1) {
-      if (cartProducts !== null) {
-        cartProducts![curPos].qtd! += 1;
-        localStorage.setItem("cartData", JSON.stringify(cartProducts));
-      }
+      return curPos;
     } else {
-      usedIds === null ? setusedIds([id]) : setusedIds([...usedIds!, id]);
+      return null;
     }
   }
+
+  function handleCartAdd(id: number) {
+    const position = findProductInArray(id);
+    if (position !== null && cartProducts) {
+      const updatedCartProducts = [...cartProducts];
+      updatedCartProducts[position] = {
+        ...updatedCartProducts[position],
+        qtd: 1 + updatedCartProducts[position].qtd,
+      };
+      setCartProducts(updatedCartProducts);
+    } else {
+      usedIds === null ? setUsedIds([id]) : setUsedIds([...usedIds!, id]);
+    }
+  }
+
+  function changeProdQtd(id: number, qtd: number) {
+    const position = findProductInArray(id);
+    if (position !== null && cartProducts) {
+      const updatedCartProducts = [...cartProducts];
+      updatedCartProducts[position] = {
+        ...updatedCartProducts[position],
+        qtd: qtd,
+      };
+      setCartProducts(updatedCartProducts);
+    }
+  }
+
   return (
     <CartProductsContext.Provider value={contextValue}>
       {children}

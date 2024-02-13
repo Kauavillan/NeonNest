@@ -10,14 +10,15 @@ interface Props {
   title: string;
   price: number;
   discount?: number;
+  discountedPrice?: string | number;
 }
-export default function Buy({ id, title, price, discount }: Props) {
-  if (discount) {
-    var afterPrice: number = Number(price) - (Number(price) * discount) / 100;
-    afterPrice = Number(afterPrice.toFixed(2));
-  } else {
-    var afterPrice = 0;
-  }
+export default function Buy({
+  id,
+  title,
+  price,
+  discount,
+  discountedPrice,
+}: Props) {
   return (
     <div className={styles.buy}>
       <h1>{title}</h1>
@@ -25,7 +26,7 @@ export default function Buy({ id, title, price, discount }: Props) {
         {discount ? (
           <>
             <span id={styles.discount}>From {price.toFixed(2)} to:</span>
-            <span id={styles.price}>${afterPrice}</span>
+            <span id={styles.price}>${discountedPrice}</span>
           </>
         ) : (
           <span id={styles.price}>${price.toFixed(2)}</span>

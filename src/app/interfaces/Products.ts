@@ -4,6 +4,7 @@ export interface IProduct {
   price: number;
   discount?: number;
   description: string;
+  discountedPrice?: number | string;
   category: string;
   images: string[] | string;
   qtd?: number;

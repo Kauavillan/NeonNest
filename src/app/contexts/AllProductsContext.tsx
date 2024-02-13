@@ -7,6 +7,9 @@ import {
   useState,
 } from "react";
 import { IProduct } from "../interfaces/Products";
+interface IFP {
+  finalPrice: number | string;
+}
 
 export const AllProducts = createContext<IProduct[] | null>(null);
 
@@ -20,7 +23,19 @@ const ProductsProvider = ({ children }: { children: ReactNode }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setAllProducts(data);
+          const finalProducts = data.map((prod: IProduct) => {
+            if (prod.discount) {
+              return Object.assign(prod, {
+                discountedPrice: (
+                  Number(prod.price) -
+                  (Number(prod.price) * prod.discount) / 100
+                ).toFixed(2),
+              });
+            }
+            return prod;
+          });
+
+          setAllProducts(finalProducts);
         });
     } catch (e: any) {
       return setAllProducts(null);
