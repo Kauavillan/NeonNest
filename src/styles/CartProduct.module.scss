@@ -29,6 +29,16 @@
       }
     }
   }
+  .remove {
+    svg {
+      font-size: 25px;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        cursor: pointer;
+        color: $warningRed;
+      }
+    }
+  }
 
   #discount {
     span {

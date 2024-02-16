@@ -7,11 +7,17 @@ import Loading from "../items/Loading";
 import Shipment from "../items/Shipment";
 import { ICartProduct } from "../interfaces/CartProducts";
 import { useShipmentContext } from "../contexts/ShipmentContext";
+import BuyNowButton from "../items/BuyNowButton";
 import Button from "../items/Button";
+import { TbTrashXFilled } from "react-icons/tb";
+import PopUp from "../components/PopUp";
 export default function Cart() {
-  const { cartProducts, handleCartAdd } = useCartProductsContext();
+  const { cartProducts, handleCartAdd, removeAllProducts } =
+    useCartProductsContext();
   const shipmentTotalData = useShipmentContext();
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [removeAllPopUp, setRemoveAllPopUp] = useState<boolean>(false);
+
   useEffect(() => {
     if (cartProducts) {
       const finalPrice: number = cartProducts.reduce(
@@ -28,12 +34,7 @@ export default function Cart() {
         },
         0
       );
-
-      if (shipmentTotalData?.shipmentData?.price) {
-        setTotalPrice(finalPrice + totalPrice);
-      } else {
-        setTotalPrice(finalPrice);
-      }
+      setTotalPrice(finalPrice);
     }
   }, [cartProducts]);
 
@@ -41,6 +42,9 @@ export default function Cart() {
     if (shipmentTotalData?.shipmentData?.price)
       setTotalPrice(totalPrice + shipmentTotalData.shipmentData?.price);
   }, [shipmentTotalData!.shipmentData?.price]);
+
+  useEffect(() => {}, [removeAllPopUp]);
+
   return (
     <main className={styles.cart}>
       {cartProducts === undefined ? (
@@ -55,6 +59,23 @@ export default function Cart() {
       ) : (
         <div className={styles.container}>
           <div>
+            {removeAllPopUp === true && (
+              <PopUp
+                title="Are you sure you want to remove all products from your cart?"
+                btn1Text="cancel"
+                btn2Text="remove all"
+                btn1Action={() => setRemoveAllPopUp(false)}
+                btn2Action={removeAllProducts}
+              />
+            )}
+            <div
+              onClick={() => {
+                setRemoveAllPopUp(!removeAllPopUp);
+              }}
+              className={styles.rmAll}
+            >
+              <Button text="Remove all" Icon={TbTrashXFilled} color="red" />
+            </div>
             {cartProducts.map((product) => {
               return (
                 <CartProduct
@@ -100,10 +121,17 @@ export default function Cart() {
             )}
             <div className={styles.total}>
               <h2>Total</h2>
-              <span>${totalPrice.toFixed(2)}</span>
+              <span>
+                $
+                {shipmentTotalData?.shipmentData?.price
+                  ? (
+                      shipmentTotalData?.shipmentData?.price + totalPrice
+                    ).toFixed(2)
+                  : totalPrice.toFixed(2)}
+              </span>
             </div>
-            <div>
-              <Button text="Checkout" color="blue" />
+            <div className={styles.checkout}>
+              <BuyNowButton text={"Checkout"} color="blue" />
             </div>
           </div>
         </div>

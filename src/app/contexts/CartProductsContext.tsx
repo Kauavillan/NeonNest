@@ -14,18 +14,17 @@ interface CartContextProps {
   cartProducts: ICartProduct[] | null | undefined;
   handleCartAdd: (id: number) => void;
   changeProdQtd: (id: number, qtd: number) => void;
+  removeOneProduct: (id: number) => void;
+  removeAllProducts: () => void;
 }
 
 export const CartProductsContext = createContext<CartContextProps | null>(null);
 
 const CartProductsProvider = ({ children }: { children: ReactNode }) => {
-  const [usedIds, setUsedIds] = useState<number[] | null>(null);
   const [cartProducts, setCartProducts] = useState<
     ICartProduct[] | null | undefined
   >(undefined);
   const [allProducts, setAllProducts] = useState<ICartProduct[] | null>(null);
-
-  const [freeIds, setFreeIds] = useState<boolean>(false); // Prevents that usedIds add duplicated products to useState when getting products from localStorage
 
   const prods = useAllProductsContext();
 
@@ -44,13 +43,8 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const prevData = localStorage.getItem("cartData");
-    let idArr: number[] = [];
     if (prevData) {
       setCartProducts(JSON.parse(prevData));
-      JSON.parse(prevData).forEach((e: ICartProduct) => {
-        idArr.push(e.id);
-      });
-      setUsedIds(idArr);
     } else {
       setCartProducts(null);
     }
@@ -70,28 +64,24 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (cartProducts && cartProducts.length > 0) {
       localStorage.setItem("cartData", JSON.stringify(cartProducts));
-      console.log(cartProducts);
     }
   }, [cartProducts]);
-
-  useEffect(() => {
-    if (usedIds && freeIds) setIntoCart(usedIds[usedIds.length - 1]);
-    if (!freeIds) setFreeIds(true);
-  }, [usedIds]);
 
   const contextValue: CartContextProps = {
     cartProducts,
     handleCartAdd,
     changeProdQtd,
+    removeOneProduct,
+    removeAllProducts,
   };
 
   function findProductInArray(id: number): number | null {
-    let curPos: number | undefined = usedIds?.indexOf(id);
-    if (curPos !== undefined && curPos !== -1) {
-      return curPos;
-    } else {
-      return null;
+    if (cartProducts) {
+      for (let i = 0; i < cartProducts?.length; i++) {
+        if (cartProducts[i].id === id) return i;
+      }
     }
+    return null;
   }
 
   function handleCartAdd(id: number) {
@@ -104,7 +94,14 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
       };
       setCartProducts(updatedCartProducts);
     } else {
-      usedIds === null ? setUsedIds([id]) : setUsedIds([...usedIds!, id]);
+      if (allProducts) {
+        for (let i = 0; i < allProducts?.length; i++) {
+          if (allProducts[i].id === id) {
+            setIntoCart(i);
+            break;
+          }
+        }
+      }
     }
   }
 
@@ -117,6 +114,23 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
         qtd: qtd,
       };
       setCartProducts(updatedCartProducts);
+    }
+  }
+
+  function removeAllProducts() {
+    setCartProducts(null);
+    localStorage.removeItem("cartData");
+  }
+
+  function removeOneProduct(id: number) {
+    const position = findProductInArray(id);
+    if (position !== null && cartProducts) {
+      const updatedCartProducts = [...cartProducts];
+      updatedCartProducts.splice(position, 1);
+
+      updatedCartProducts.length === 0
+        ? removeAllProducts()
+        : setCartProducts(updatedCartProducts);
     }
   }
 
