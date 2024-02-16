@@ -1,0 +1,31 @@
+@import "_variables";
+@import "_functions";
+
+.background {
+  @include setDisplayFlex(row, center, center);
+  z-index: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: $blurredBlack;
+  .container {
+    z-index: 3;
+    padding: 20px;
+    background-color: $darkGrey;
+  }
+  .quit {
+    cursor: pointer;
+    position: absolute;
+    visibility: none;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+  }
+  .buttons {
+    margin: 40px 40px 20px 40px;
+    @include setDisplayFlex(row, space-between, center);
+  }
+}

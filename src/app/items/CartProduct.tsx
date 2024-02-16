@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { useCartProductsContext } from "../contexts/CartProductsContext";
 import Link from "next/link";
+import { TbTrashFilled } from "react-icons/tb";
 export default function CartProduct({
   id,
   title,
@@ -14,7 +15,7 @@ export default function CartProduct({
   images,
   qtd,
 }: ICartProduct) {
-  const { changeProdQtd } = useCartProductsContext();
+  const { changeProdQtd, removeOneProduct } = useCartProductsContext();
 
   const [quant, setQuant] = useState(qtd);
 
@@ -59,6 +60,9 @@ export default function CartProduct({
               ? (Number(discountedPrice) * quant).toFixed(2)
               : (Number(price) * quant).toFixed(2)}
           </span>
+        </div>
+        <div className={styles.remove}>
+          <TbTrashFilled onClick={() => removeOneProduct(id)} />
         </div>
       </div>
     </div>
