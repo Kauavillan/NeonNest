@@ -1,12 +1,10 @@
-import { IconType } from "react-icons";
 import styles from "../../styles/Button.module.scss";
-import { useEffect } from "react";
 import { useCartProductsContext } from "../contexts/CartProductsContext";
 interface Props {
   id?: number;
   text: string;
   Icon?: React.ElementType;
-  color: string;
+  color: "blue" | "pink" | "red";
 }
 
 export default function Button({ id, text, Icon, color }: Props) {

@@ -2,28 +2,38 @@
 @import "_functions";
 $skew: 20deg;
 .but {
+  border: none;
   background-color: transparent;
   position: relative;
-  color: $lightGreen;
   text-transform: uppercase;
   cursor: pointer;
+
+  max-width: 520px;
   font-size: 1em;
-  padding: 15px 0;
-  transform: skewX(-$skew);
+  padding: 15px 10px;
   transition: 0.2s ease-in-out;
+
   div {
-    transform: skewX($skew);
-  }
-  &:hover {
-    transform: skewX(0);
-    background-color: $lightGreen;
-    div {
-      transform: skewX(0);
-    }
+    position: relative;
+    z-index: 2;
   }
   svg {
     margin-left: 10px;
     transform: translateY(4px);
+  }
+  &::after {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -70%) skewX(-$skew);
+    transition: 0.2s ease-in-out;
+  }
+  &:hover {
+    &::after {
+      transform: translate(-50%, -70%) skewX(0);
+    }
   }
 }
 .pink {
@@ -31,4 +41,7 @@ $skew: 20deg;
 }
 .blue {
   @include setColors($lightBlue);
+}
+.red {
+  @include setColors($warningRed);
 }

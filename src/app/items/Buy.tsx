@@ -1,10 +1,10 @@
 "use client";
 import styles from "../../styles/Buy.module.scss";
 import Button from "./Button";
-
 //Icons
-import { FaCartPlus, FaCartShopping } from "react-icons/fa6";
+import { FaCartPlus } from "react-icons/fa6";
 import Shipment from "./Shipment";
+import BuyNowButton from "./BuyNowButton";
 interface Props {
   id: number;
   title: string;
@@ -33,7 +33,8 @@ export default function Buy({
         )}
       </div>
       <div className={styles.buttons}>
-        <Button text="Buy Now" Icon={FaCartShopping} color={"blue"} />
+        <BuyNowButton text="Buy Now" color="blue" />
+
         <Button id={id} text="Add to Cart" Icon={FaCartPlus} color={"pink"} />
       </div>
       <Shipment />

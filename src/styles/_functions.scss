@@ -18,11 +18,14 @@
 }
 
 @mixin setColors($color) {
-  color: $color;
-  border: 2px solid $color;
+  color: white;
+  &::after {
+    border: 2px solid $color;
+  }
   &:hover {
-    background-color: $color;
-    color: $darkGrey;
+    &::after {
+      background-color: $color;
+    }
   }
 }
 

@@ -22,6 +22,7 @@
   }
   .buttons {
     @include setDisplayFlex(column);
+    max-width: 520px;
     button:first-child {
       margin: 20px 0;
     }

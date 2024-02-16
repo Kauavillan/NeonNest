@@ -2,6 +2,7 @@
 @import "_functions";
 
 .cart {
+  padding-bottom: 30px;
   @include setSizes();
   .container {
     @include setDisplayFlex(row, space-between);
@@ -15,6 +16,7 @@
 
       .details {
         text-align: center;
+        font-size: 1.2em;
         width: 80%;
         margin-bottom: 10px;
         div:first-child {
@@ -34,6 +36,14 @@
           color: $lightGreen;
         }
       }
+      .checkout {
+        margin-top: 20px;
+        width: 70%;
+        font-size: 1.5em;
+      }
     }
+  }
+  .rmAll {
+    margin-bottom: 20px;
   }
 }

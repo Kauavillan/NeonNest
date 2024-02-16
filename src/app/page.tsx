@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main className={styles.home}>
       <Hero />
-      <section className={styles.prod_area}>
+      <section className={styles.prod_area} id="products">
         {!loading ? (
           products?.map((prod: IProduct) => (
             <Product
