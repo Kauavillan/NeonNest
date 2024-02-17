@@ -8,8 +8,4 @@ export interface IProduct {
   category: string;
   images: string[] | string;
   qtd?: number;
-  rating: {
-    rate: number;
-    count: number;
-  };
 }

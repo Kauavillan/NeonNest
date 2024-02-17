@@ -33,3 +33,12 @@
   padding-top: $marginFromTop;
   margin: 30px 5% 0 5%;
 }
+
+@mixin setProdArea() {
+  @include setDisplayFlex(row, center, stretch);
+  flex-wrap: wrap;
+  & > a,
+  > div {
+    min-width: 300px;
+  }
+}

@@ -5,16 +5,19 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useCartProductsContext } from "../contexts/CartProductsContext";
 import { useShipmentContext } from "../contexts/ShipmentContext";
 import { useRouter } from "next/navigation";
+import { useBoughtProductsContext } from "../contexts/BoughtProductsContext";
 interface Props {
   text: string;
   color: string;
+  addIds: number[];
 }
 
-export default function BuyNowButton({ text, color }: Props) {
+export default function BuyNowButton({ text, color, addIds }: Props) {
   const { cartProducts, handleCartAdd } = useCartProductsContext();
   const shipmentData = useShipmentContext();
   const [warning, setWarning] = useState<boolean>(true);
   const [showWarningMessage, setShowWarningMessage] = useState<boolean>(false);
+  const { addJustBoughtProducts } = useBoughtProductsContext();
   const router = useRouter();
   useEffect(() => {
     if (shipmentData?.shipmentData) {
@@ -24,6 +27,7 @@ export default function BuyNowButton({ text, color }: Props) {
   function handleBuyButton() {
     setShowWarningMessage(true);
     if (!warning) {
+      addJustBoughtProducts(addIds);
       router.push("/finished");
     }
   }

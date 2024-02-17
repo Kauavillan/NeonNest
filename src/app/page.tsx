@@ -36,7 +36,6 @@ export default function Home() {
               description={prod.description}
               category={prod.category}
               images={prod.images}
-              rating={prod.rating}
             />
           ))
         ) : (

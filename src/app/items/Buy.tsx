@@ -33,7 +33,7 @@ export default function Buy({
         )}
       </div>
       <div className={styles.buttons}>
-        <BuyNowButton text="Buy Now" color="blue" />
+        <BuyNowButton text="Buy Now" color="blue" addIds={[id]} />
 
         <Button id={id} text="Add to Cart" Icon={FaCartPlus} color={"pink"} />
       </div>

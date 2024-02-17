@@ -12,11 +12,19 @@ import Button from "../items/Button";
 import { TbTrashXFilled } from "react-icons/tb";
 import PopUp from "../components/PopUp";
 export default function Cart() {
-  const { cartProducts, handleCartAdd, removeAllProducts } =
-    useCartProductsContext();
+  const { cartProducts, removeAllProducts } = useCartProductsContext();
   const shipmentTotalData = useShipmentContext();
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [removeAllPopUp, setRemoveAllPopUp] = useState<boolean>(false);
+  const [ids, setIds] = useState<number[] | null>(null);
+
+  function getProductIds() {
+    const currentIdsArr: number[] = [];
+    cartProducts?.forEach((prod) => {
+      currentIdsArr.push(prod.id);
+    });
+    setIds(currentIdsArr);
+  }
 
   useEffect(() => {
     if (cartProducts) {
@@ -35,6 +43,7 @@ export default function Cart() {
         0
       );
       setTotalPrice(finalPrice);
+      getProductIds();
     }
   }, [cartProducts]);
 
@@ -42,8 +51,6 @@ export default function Cart() {
     if (shipmentTotalData?.shipmentData?.price)
       setTotalPrice(totalPrice + shipmentTotalData.shipmentData?.price);
   }, [shipmentTotalData!.shipmentData?.price]);
-
-  useEffect(() => {}, [removeAllPopUp]);
 
   return (
     <main className={styles.cart}>
@@ -131,7 +138,9 @@ export default function Cart() {
               </span>
             </div>
             <div className={styles.checkout}>
-              <BuyNowButton text={"Checkout"} color="blue" />
+              {ids && (
+                <BuyNowButton text={"Checkout"} color="blue" addIds={ids} />
+              )}
             </div>
           </div>
         </div>

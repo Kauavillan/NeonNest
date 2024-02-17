@@ -1,0 +1,16 @@
+@import "_variables";
+@import "_functions";
+.finished {
+  @include setDisplayFlex(column, center, center);
+  width: 100vw;
+  height: 100vh;
+  h1 {
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 1.2em;
+  }
+  .prodArea {
+    @include setProdArea();
+  }
+}

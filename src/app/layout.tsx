@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import ProductsProvider from "./contexts/AllProductsContext";
 import CartProductsProvider from "./contexts/CartProductsContext";
 import { ShipmentProvider } from "./contexts/ShipmentContext";
+import BoughtProductsProvider from "./contexts/BoughtProductsContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +21,12 @@ export default function RootLayout({
         <WindowSizeProvider>
           <ShipmentProvider>
             <ProductsProvider>
-              <CartProductsProvider>
-                <NavBar />
-                {children}
-              </CartProductsProvider>
+              <BoughtProductsProvider>
+                <CartProductsProvider>
+                  <NavBar />
+                  {children}
+                </CartProductsProvider>
+              </BoughtProductsProvider>
             </ProductsProvider>
           </ShipmentProvider>
         </WindowSizeProvider>

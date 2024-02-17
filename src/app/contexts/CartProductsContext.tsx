@@ -53,7 +53,7 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (prods) {
       const qtdProds = prods.map((prod) => {
-        const { description, category, rating, ...rest } = prod;
+        const { description, category, ...rest } = prod;
         if (Array.isArray(rest.images)) rest.images = rest.images[0];
         return Object.assign(rest, quantities);
       });
@@ -66,14 +66,6 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("cartData", JSON.stringify(cartProducts));
     }
   }, [cartProducts]);
-
-  const contextValue: CartContextProps = {
-    cartProducts,
-    handleCartAdd,
-    changeProdQtd,
-    removeOneProduct,
-    removeAllProducts,
-  };
 
   function findProductInArray(id: number): number | null {
     if (cartProducts) {
@@ -133,6 +125,14 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
         : setCartProducts(updatedCartProducts);
     }
   }
+
+  const contextValue: CartContextProps = {
+    cartProducts,
+    handleCartAdd,
+    changeProdQtd,
+    removeOneProduct,
+    removeAllProducts,
+  };
 
   return (
     <CartProductsContext.Provider value={contextValue}>
