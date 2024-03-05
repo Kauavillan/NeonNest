@@ -17,22 +17,11 @@ $black: #000;
 $blurredBlack: #00000041;
 
 // Fonts
-
-@font-face {
-  font-family: "Space-Monkey";
-  src: url(../../public/fonts/SpaceMonkeyBold.otf) format("opentype");
-}
-@font-face {
-  font-family: "Glitch";
-  src: url(../../public/fonts/Sdglitch.ttf) format("truetype");
-}
 @font-face {
   font-family: "Default";
-  src: url(../../public/fonts/TechnoCharm.otf) format("opentype");
+  src: url(/fonts/TechnoCharm.otf) format("opentype");
 }
 
-$spaceMonkey: "Space-Monkey", "Default", "Sans serif";
-$glitch: "Glitch";
 $default: "Default";
 
 // Sizes

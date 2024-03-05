@@ -1,11 +1,7 @@
 @import "_variables";
 @import "_functions";
 .hero {
-  @include setBackground(
-    "../../public/images/hero_background.jpg",
-    cover,
-    center bottom
-  );
+  @include setBackground("/images/hero_background.jpg", cover, center bottom);
   display: flex;
   justify-content: space-between;
   top: 0;
