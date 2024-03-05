@@ -6,6 +6,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { useCartProductsContext } from "../contexts/CartProductsContext";
 import Link from "next/link";
 import { TbTrashFilled } from "react-icons/tb";
+import { useWindowSizeContext } from "../contexts/WindowSizeContext";
 export default function CartProduct({
   id,
   title,
@@ -17,6 +18,7 @@ export default function CartProduct({
 }: ICartProduct) {
   const { changeProdQtd, removeOneProduct } = useCartProductsContext();
 
+  const windowSize = useWindowSizeContext();
   const [quant, setQuant] = useState(qtd);
 
   useEffect(() => {
@@ -42,10 +44,19 @@ export default function CartProduct({
         </Link>
       </div>
       <div className={styles.details}>
-        <h3>
-          <Link href={`/products/${id}`}>{title}</Link>
-        </h3>
-
+        <div className={styles.name}>
+          <h3>
+            <Link href={`/products/${id}`}>{title}</Link>
+          </h3>
+          {windowSize.width < 1000 && (
+            <span className={styles.finalPrice}>
+              ${" "}
+              {discount
+                ? (Number(discountedPrice) * quant).toFixed(2)
+                : (Number(price) * quant).toFixed(2)}
+            </span>
+          )}
+        </div>
         <div className={`${styles.qtd} ${quant === 1 && styles.notMinus}`}>
           <FaMinus onClick={() => quant > 1 && handleChangeOne("m")} />
 
@@ -54,12 +65,14 @@ export default function CartProduct({
           <FaPlus onClick={() => handleChangeOne("p")} />
         </div>
         <div>
-          <span>
-            ${" "}
-            {discount
-              ? (Number(discountedPrice) * quant).toFixed(2)
-              : (Number(price) * quant).toFixed(2)}
-          </span>
+          {windowSize.width >= 1000 && (
+            <span className={styles.finalPrice}>
+              ${" "}
+              {discount
+                ? (Number(discountedPrice) * quant).toFixed(2)
+                : (Number(price) * quant).toFixed(2)}
+            </span>
+          )}
         </div>
         <div className={styles.remove}>
           <TbTrashFilled onClick={() => removeOneProduct(id)} />

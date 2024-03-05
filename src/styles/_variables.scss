@@ -1,4 +1,5 @@
 // Colors
+$hero: #dfff00;
 $warningRed: #ff2b2b;
 $lightRed: #e85656;
 $lightGreen: #00ff9f;
@@ -14,6 +15,7 @@ $lightGrey: #b4b4b4;
 $white: #fff;
 $black: #000;
 $blurredBlack: #00000041;
+
 // Fonts
 
 @font-face {
@@ -34,6 +36,7 @@ $glitch: "Glitch";
 $default: "Default";
 
 // Sizes
-
+$max-width-md: 1000px;
 $max-width-sm: 800px;
 $marginFromTop: 70px;
+$scrollBarWidth: 18px;

@@ -32,9 +32,11 @@
 .slideItem {
   width: 100%;
 }
-.swiper div::after {
-  color: $white;
-}
-.swiper span {
-  background-color: $white;
+.swiper {
+  div::after {
+    color: $white;
+  }
+  span {
+    background-color: $white;
+  }
 }

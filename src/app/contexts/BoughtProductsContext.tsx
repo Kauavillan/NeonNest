@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 type prductType = IProduct[] | null | undefined;
 interface BoughtProductsContextProps {
   boughtProducts: prductType;
-  justBoughtProducts: IProduct[] | null;
+  justBoughtProducts: IProduct[] | null | undefined;
   addJustBoughtProducts: (ids: number[]) => void;
 }
 
@@ -23,17 +23,28 @@ export default function BoughtProductsProvider({
   const [allProducts, setAllProducts] = useState<IProduct[] | null>(null);
   const [boughtProducts, setBoughtProducts] = useState<prductType>(undefined);
   const [justBoughtProducts, setJustBoughtProducts] = useState<
-    IProduct[] | null
-  >(null);
+    IProduct[] | null | undefined
+  >(undefined);
 
   const pathName = usePathname();
 
   useEffect(() => {
     const prevBoughtProds = localStorage.getItem("boughtProds");
+    const prevJustBoughtProds = sessionStorage.getItem("justBought");
     if (prevBoughtProds) {
       setBoughtProducts(JSON.parse(prevBoughtProds));
     } else setBoughtProducts(null);
+    if (prevJustBoughtProds) {
+      setJustBoughtProducts(JSON.parse(prevJustBoughtProds));
+    } else setJustBoughtProducts(null);
   }, []);
+
+  useEffect(() => {
+    if (pathName !== "/finished" && justBoughtProducts) {
+      setJustBoughtProducts(null);
+      sessionStorage.removeItem("justBought");
+    }
+  }, [pathName]);
 
   useEffect(() => {
     if (prods) {
@@ -49,6 +60,7 @@ export default function BoughtProductsProvider({
 
   useEffect(() => {
     if (justBoughtProducts && justBoughtProducts.length > 0) {
+      sessionStorage.setItem("justBought", JSON.stringify(justBoughtProducts));
       setBoughtProducts((prevBoughtProducts) => {
         if (!prevBoughtProducts) {
           return justBoughtProducts;
@@ -63,15 +75,6 @@ export default function BoughtProductsProvider({
       });
     }
   }, [justBoughtProducts]);
-
-  function findProductInArray(id: number): number | null {
-    if (boughtProducts) {
-      for (let i = 0; i < boughtProducts?.length; i++) {
-        if (boughtProducts[i].id === id) return i;
-      }
-    }
-    return null;
-  }
 
   function addJustBoughtProducts(ids: number[]): void {
     const allJustBought: IProduct[] = [];

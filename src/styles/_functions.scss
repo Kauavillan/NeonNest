@@ -11,14 +11,19 @@
   align-self: $align_self;
 }
 @mixin setBackground($url, $size, $pos: center center, $repeat: no-repeat) {
-  background-image: url($url);
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url($url);
+  // background-image: url($url);
   background-repeat: $repeat;
   background-position: $pos;
   background-size: $size;
 }
 
 @mixin setColors($color) {
-  color: white;
+  div {
+    color: white;
+  }
+
   &::after {
     border: 2px solid $color;
   }
@@ -38,7 +43,7 @@
   @include setDisplayFlex(row, center, stretch);
   flex-wrap: wrap;
   & > a,
-  > div {
+  & > .prod {
     min-width: 300px;
   }
 }

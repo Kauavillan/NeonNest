@@ -37,6 +37,7 @@
         }
       }
       .checkout {
+        @include setDisplayFlex(row, center, center, center);
         margin-top: 20px;
         width: 70%;
         font-size: 1.5em;
@@ -45,5 +46,15 @@
   }
   .rmAll {
     margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: $max-width-md) {
+  .cart .container {
+    flex-direction: column-reverse;
+    justify-content: center;
+    .summary {
+      width: 90vw;
+      margin-bottom: 40px;
+    }
   }
 }

@@ -2,34 +2,88 @@
 @import "_functions";
 .hero {
   @include setBackground(
-    "../../public/images/other background.jpg",
+    "../../public/images/hero_background.jpg",
     cover,
     center bottom
   );
-
   display: flex;
   justify-content: space-between;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  .title {
+  .text {
+    z-index: 1;
     color: $white;
-    font-size: 2em;
+    font-size: 1.6em;
     font-family: "Chakra Petch", sans-serif;
     min-width: 100px;
+    max-width: 60vw;
     min-height: 20px;
+    h1 {
+      padding-top: 10vh;
+      strong {
+        color: $hero;
+      }
+    }
+    padding-left: 2vw;
+    p {
+      margin-top: 45px;
+      padding-left: 20px;
+      max-width: 40vw;
+    }
+    .btnDiv {
+      margin-top: 10vh;
+    }
+  }
+  .person img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: auto;
+    width: 700px;
+  }
+  .size {
+    width: 200px;
+    height: 500px;
   }
 }
 
-.person img {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  height: auto;
-  width: 700px;
+@media screen and (max-width: $max-width-md) {
+  .hero {
+    padding: 0;
+
+    .text {
+      padding: 0;
+      width: 90vw;
+      max-width: none;
+      margin: auto;
+    }
+
+    .text p {
+      max-width: 100%;
+      font-size: 0.8em;
+    }
+    h1 {
+      width: 100%;
+      text-align: center;
+    }
+    p {
+      text-align: justify;
+    }
+  }
+  .btnDiv {
+    width: 100%;
+    @include setDisplayFlex(row, center);
+    button {
+      div {
+        font-size: 0.8em;
+      }
+    }
+  }
 }
-.size {
-  width: 200px;
-  height: 500px;
+@media screen and (max-width: 500px) {
+  .hero h1 {
+    font-size: 1.2em;
+  }
 }

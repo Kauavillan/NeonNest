@@ -53,7 +53,7 @@ const CartProductsProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (prods) {
       const qtdProds = prods.map((prod) => {
-        const { description, category, ...rest } = prod;
+        const { description, categories, ...rest } = prod;
         if (Array.isArray(rest.images)) rest.images = rest.images[0];
         return Object.assign(rest, quantities);
       });

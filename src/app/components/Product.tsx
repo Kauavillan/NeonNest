@@ -14,7 +14,7 @@ export default function Product({
   discountedPrice,
 }: IProduct) {
   return (
-    <Link href={`../products/${id}`} className={styles.prodContainer}>
+    <Link href={`/products/${id}`} className={styles.prodContainer}>
       <div key={id} className={styles.prod}>
         <div className={styles.imgDiv}>
           {(
@@ -23,6 +23,7 @@ export default function Product({
               width={500}
               height={500}
               alt={`${title} thumbnail`}
+              loading="lazy"
             />
           ) || (
             <SkeletonTheme baseColor="#202020" highlightColor="#444">

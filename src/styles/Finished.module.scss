@@ -1,9 +1,10 @@
 @import "_variables";
 @import "_functions";
 .finished {
-  @include setDisplayFlex(column, center, center);
-  width: 100vw;
-  height: 100vh;
+  @include setDisplayFlex(column, normal, center);
+  margin-top: calc($marginFromTop + 20px);
+  width: 100%;
+
   h1 {
     margin-bottom: 20px;
   }
@@ -12,5 +13,13 @@
   }
   .prodArea {
     @include setProdArea();
+    a {
+      display: block;
+      width: 90%;
+    }
+  }
+
+  .swiper {
+    width: 95%;
   }
 }

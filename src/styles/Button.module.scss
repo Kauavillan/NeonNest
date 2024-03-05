@@ -9,6 +9,7 @@ $skew: 20deg;
   cursor: pointer;
 
   max-width: 520px;
+  max-height: 90px;
   font-size: 1em;
   padding: 15px 10px;
   transition: 0.2s ease-in-out;
@@ -44,4 +45,25 @@ $skew: 20deg;
 }
 .red {
   @include setColors($warningRed);
+}
+.hero {
+  $heroColor: $hero;
+  color: white;
+  div {
+    color: $heroColor;
+    transition: color 0.3s ease-in-out;
+  }
+  &:hover {
+    div {
+      color: $darkGrey;
+    }
+    &::after {
+      background-color: $hero;
+    }
+  }
+
+  &::after {
+    border: 2px solid $heroColor;
+    background-color: transparent;
+  }
 }

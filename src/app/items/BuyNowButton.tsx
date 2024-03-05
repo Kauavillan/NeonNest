@@ -6,17 +6,23 @@ import { useCartProductsContext } from "../contexts/CartProductsContext";
 import { useShipmentContext } from "../contexts/ShipmentContext";
 import { useRouter } from "next/navigation";
 import { useBoughtProductsContext } from "../contexts/BoughtProductsContext";
+import { useUserDataContext } from "../contexts/UserDataContext";
+import UserDataForm from "../components/UserDataForm";
 interface Props {
   text: string;
   color: string;
   addIds: number[];
+  inCart?: boolean;
 }
 
-export default function BuyNowButton({ text, color, addIds }: Props) {
-  const { cartProducts, handleCartAdd } = useCartProductsContext();
+export default function BuyNowButton({ text, color, addIds, inCart }: Props) {
+  const { removeAllProducts } = useCartProductsContext();
+  const { userData } = useUserDataContext();
+  console.log(userData);
   const shipmentData = useShipmentContext();
   const [warning, setWarning] = useState<boolean>(true);
   const [showWarningMessage, setShowWarningMessage] = useState<boolean>(false);
+  const [showUserForm, setShowUserForm] = useState<boolean>(false);
   const { addJustBoughtProducts } = useBoughtProductsContext();
   const router = useRouter();
   useEffect(() => {
@@ -27,12 +33,24 @@ export default function BuyNowButton({ text, color, addIds }: Props) {
   function handleBuyButton() {
     setShowWarningMessage(true);
     if (!warning) {
-      addJustBoughtProducts(addIds);
-      router.push("/finished");
+      if (userData) {
+        if (inCart) removeAllProducts();
+        addJustBoughtProducts(addIds);
+        router.push("/finished");
+      } else {
+        setShowUserForm(true);
+      }
     }
   }
   return (
     <div className={styles.btnContainer}>
+      {showUserForm && (
+        <UserDataForm
+          setPopUp={setShowUserForm}
+          inCart={inCart}
+          addIds={addIds}
+        />
+      )}
       <button
         onClick={() => handleBuyButton()}
         onMouseLeave={() => setShowWarningMessage(false)}

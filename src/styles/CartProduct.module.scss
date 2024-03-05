@@ -13,14 +13,15 @@
     margin-left: 20px;
     width: 100%;
     @include setDisplayFlex(row, space-between, center);
-
+    .name {
+      max-width: 250px;
+    }
     a {
+      width: 100%;
+
       color: $white;
       text-decoration: none;
       transition: 0.3s ease-in-out;
-    }
-    h3 {
-      width: 45%;
     }
 
     div:last-child {
@@ -61,6 +62,38 @@
     svg:first-child {
       color: $lightGrey;
       cursor: not-allowed;
+    }
+  }
+  .finalPrice {
+    text-wrap: nowrap;
+    margin: 0 5px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .prod .details .qtd {
+    flex-direction: column-reverse;
+    p {
+      margin: 7px 0;
+    }
+  }
+}
+@media screen and (max-width: $max-width-md) {
+  .prod {
+    width: 100%;
+    img {
+      width: 150px;
+      height: 100px;
+    }
+    .details {
+      .name {
+        width: 25vw;
+      }
+    }
+    .finalPrice {
+      margin: 0;
+      font-size: 1.2em;
+      color: $lightGreen;
     }
   }
 }

@@ -2,6 +2,7 @@
 @import "_variables";
 html {
   font-size: 16px;
+  scroll-behavior: smooth;
 }
 * {
   margin: 0px;
@@ -21,4 +22,8 @@ span,
 div,
 li {
   color: $white;
+}
+:root {
+  --swiper-theme-color: white !important;
+  --swiper-pagination-bullet-inactive-color: #9b9b9b !important;
 }

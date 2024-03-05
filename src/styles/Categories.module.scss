@@ -1,0 +1,12 @@
+@import "_variables";
+@import "_functions";
+.container {
+  margin-top: calc($marginFromTop + 30px);
+  h1 {
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .prodArea {
+    @include setProdArea();
+  }
+}

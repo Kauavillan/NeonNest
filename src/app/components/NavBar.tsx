@@ -5,9 +5,11 @@ import { IoSearch } from "react-icons/io5";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useCartProductsContext } from "../contexts/CartProductsContext";
+import CategoriesList from "../items/CategoriesList";
 export default function NavBar() {
   const [HeroVisible, SetHeroVisible] = useState<boolean>(true);
-  const { cartProducts, handleCartAdd } = useCartProductsContext();
+  const [showCatList, setShowCatList] = useState<boolean>(false);
+  const { cartProducts } = useCartProductsContext();
   const isHeroSectionVisible = () => {
     const heroSection = document.getElementById("hero");
     if (heroSection) {
@@ -32,37 +34,33 @@ export default function NavBar() {
     };
   }, []);
   return (
-    <nav className={`${styles.navbar} ${HeroVisible && styles.hide}`}>
-      <ul>
-        <li>
-          <Link href={"/"} onClick={() => SetHeroVisible(true)}>
-            <Image
-              src={"/images/logo.png"}
-              alt="Website logo"
-              width={60}
-              height={60}
-            />
-          </Link>
-        </li>
-        <li>
-          <Link href={"/"} onClick={() => SetHeroVisible(true)}>
-            Products
-          </Link>
-        </li>
-        <li>
-          <Link href={"/cart"}>
-            {cartProducts && cartProducts.length > 0 && (
-              <div>
-                <span>{cartProducts.length}</span>
-              </div>
-            )}
-            <FaCartShopping />
-          </Link>
-        </li>
-        <li>
-          <IoSearch />
-        </li>
-      </ul>
-    </nav>
+    <header className={`${styles.navbar} ${HeroVisible && styles.hide}`}>
+      <nav>
+        <ul>
+          <li>
+            <Link href={"/"} onClick={() => SetHeroVisible(true)}>
+              <Image
+                src={"/images/logo.png"}
+                alt="Website logo"
+                width={60}
+                height={60}
+              />
+            </Link>
+          </li>
+          <li onClick={() => setShowCatList(!showCatList)}>Products</li>
+          <li>
+            <Link href={"/cart"}>
+              {cartProducts && cartProducts.length > 0 && (
+                <div>
+                  <span>{cartProducts.length}</span>
+                </div>
+              )}
+              <FaCartShopping />
+            </Link>
+          </li>
+        </ul>
+        <CategoriesList visible={showCatList} setVisible={setShowCatList} />
+      </nav>
+    </header>
   );
 }

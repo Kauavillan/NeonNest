@@ -34,7 +34,7 @@ export default function Home() {
               discount={prod.discount}
               discountedPrice={prod.discountedPrice}
               description={prod.description}
-              category={prod.category}
+              categories={prod.categories}
               images={prod.images}
             />
           ))

@@ -1,6 +1,7 @@
 @import "_variables";
 @import "_functions";
 .buy {
+  @include setDisplayFlex(column);
   margin-left: 10vw;
   min-width: 25vw;
   h1 {
@@ -31,5 +32,9 @@
 @media screen and (max-width: 1200px) {
   .buy {
     margin: 20px auto 0 auto;
+    .buttons {
+      align-self: center;
+      width: 100%;
+    }
   }
 }

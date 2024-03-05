@@ -7,6 +7,7 @@ import ProductsProvider from "./contexts/AllProductsContext";
 import CartProductsProvider from "./contexts/CartProductsContext";
 import { ShipmentProvider } from "./contexts/ShipmentContext";
 import BoughtProductsProvider from "./contexts/BoughtProductsContext";
+import UserDataProvider from "./contexts/UserDataContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +24,10 @@ export default function RootLayout({
             <ProductsProvider>
               <BoughtProductsProvider>
                 <CartProductsProvider>
-                  <NavBar />
-                  {children}
+                  <UserDataProvider>
+                    <NavBar />
+                    {children}
+                  </UserDataProvider>
                 </CartProductsProvider>
               </BoughtProductsProvider>
             </ProductsProvider>

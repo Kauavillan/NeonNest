@@ -4,7 +4,7 @@ interface Props {
   id?: number;
   text: string;
   Icon?: React.ElementType;
-  color: "blue" | "pink" | "red";
+  color: "blue" | "pink" | "red" | "hero";
 }
 
 export default function Button({ id, text, Icon, color }: Props) {
