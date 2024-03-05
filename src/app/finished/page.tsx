@@ -33,7 +33,7 @@ export default function Finished() {
     }
   }, [windowSize]);
   return (
-    <>
+    <section>
       {justBoughtProducts === undefined ? (
         <Loading />
       ) : justBoughtProducts === null ? (
@@ -128,6 +128,6 @@ export default function Finished() {
           </div>
         </div>
       )}
-    </>
+    </section>
   );
 }

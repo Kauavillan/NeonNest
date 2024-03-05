@@ -2,11 +2,18 @@
 @import "_functions";
 .finished {
   @include setDisplayFlex(column, normal, center);
-  margin-top: calc($marginFromTop + 20px);
-  width: 100%;
+  margin: calc($marginFromTop + 20px) auto 0 auto;
+  width: 95vw;
 
+  h1,
+  p {
+    text-align: center;
+  }
   h1 {
     margin-bottom: 20px;
+  }
+  h3:not(.prodArea h3) {
+    margin-top: 30px;
   }
   p {
     font-size: 1.2em;
@@ -17,9 +24,21 @@
       display: block;
       width: 90%;
     }
+    p {
+      text-align: left;
+    }
   }
 
   .swiper {
     width: 95%;
+  }
+}
+@media screen and (max-width: $max-width-sm) {
+  .finished {
+    .prodArea {
+      a {
+        margin: 30px auto;
+      }
+    }
   }
 }
