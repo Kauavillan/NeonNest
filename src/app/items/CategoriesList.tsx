@@ -30,10 +30,6 @@ export default function CategoriesList({
     }
   }, [allProducts]);
 
-  useEffect(() => {
-    console.log(categoriesList);
-  }, [categoriesList]);
-
   return (
     <div
       className={`${styles.container} ${

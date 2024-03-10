@@ -1,33 +1,56 @@
 @import "_variables";
 @import "_functions";
 $translateSize: 35px;
+$max-height: 250px;
+$transitionTime: 0.3s;
+@keyframes scrollbarColor {
+  95% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: $lightGreen;
+  }
+}
 .visible {
-  transform: translateY($translateSize);
-  opacity: 1;
+  .list ul {
+    max-height: $max-height;
+  }
+  ::-webkit-scrollbar-thumb {
+    animation: scrollbarColor 0.5s forwards;
+  }
 }
 .invisible {
-  transform: translateY(-$translateSize);
-  opacity: 0;
   .list ul {
-    display: none;
+    max-height: 0px;
   }
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  // .list ul {
+  //   max-height: 0px;
+  // }
+  // .list ul {
+  //   transition: display 0.1s linear calc($tempoTransition + 1s);
+  //   display: none;
+  // }
 }
 .container {
   @include setDisplayFlex(row, center, center);
-  transition: 0.2s ease-in-out;
+
   z-index: -1;
   position: fixed;
   top: 30px;
   left: 0;
   width: 100vw;
-  height: 80px;
+  margin-top: 20px;
   flex-wrap: wrap;
   .list {
     @include setDisplayFlex(row, space-between, center);
+
     width: 80%;
     background-color: $darkBlue;
     ul {
-      max-height: 250px;
+      transition: max-height $transitionTime ease-in-out;
       flex-wrap: wrap;
       overflow-y: scroll;
     }
@@ -45,7 +68,7 @@ $translateSize: 35px;
       background-color: transparent;
     }
     ::-webkit-scrollbar-thumb {
-      background-color: $lightGreen;
+      transition: 1s linear calc($transitionTime + 0.5s);
     }
   }
 }

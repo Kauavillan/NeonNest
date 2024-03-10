@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styles from "../../styles/NavBar.module.scss";
 import { FaCartShopping } from "react-icons/fa6";
-import { IoSearch } from "react-icons/io5";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useCartProductsContext } from "../contexts/CartProductsContext";
@@ -23,12 +22,12 @@ export default function NavBar() {
       if (!isHeroSectionVisible()) {
         SetHeroVisible(false);
       } else {
+        setShowCatList(false);
         SetHeroVisible(true);
       }
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
