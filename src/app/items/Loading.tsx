@@ -5,7 +5,7 @@ export default function Loading() {
     <div className={styles.loading}>
       <p>Loading...</p>
       <Image
-        src="/images/loading_product.svg"
+        src="/assets/images/loading_product.svg"
         width={150}
         height={150}
         alt="loading gif"

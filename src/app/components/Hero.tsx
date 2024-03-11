@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Person from "/public/images/Hero_Person.png";
+import Person from "/public/assets/images/Hero_Person.png";
 import styles from "../../styles/Hero.module.scss";
 import Button from "../items/Button";
 import { useWindowSizeContext } from "../contexts/WindowSizeContext";

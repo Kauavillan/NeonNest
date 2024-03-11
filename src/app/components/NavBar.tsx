@@ -39,7 +39,7 @@ export default function NavBar() {
           <li>
             <Link href={"/"} onClick={() => SetHeroVisible(true)}>
               <Image
-                src={"/images/logo.png"}
+                src={"/assets/images/logo.png"}
                 alt="Website logo"
                 width={60}
                 height={60}

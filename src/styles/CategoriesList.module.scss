@@ -26,13 +26,6 @@ $transitionTime: 0.3s;
   ::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
-  // .list ul {
-  //   max-height: 0px;
-  // }
-  // .list ul {
-  //   transition: display 0.1s linear calc($tempoTransition + 1s);
-  //   display: none;
-  // }
 }
 .container {
   @include setDisplayFlex(row, center, center);

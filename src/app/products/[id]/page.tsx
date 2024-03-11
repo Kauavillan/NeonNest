@@ -58,7 +58,7 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
             it's too late!
           </p>
           <Image
-            src="/images/police_404.gif"
+            src="/assets/images/police_404.gif"
             width={400}
             height={300}
             alt="police gif"
