@@ -15,9 +15,11 @@
     @include setDisplayFlex(row, space-between, center);
     .name {
       max-width: 250px;
+      text-wrap: wrap;
+      text-overflow: hidden;
     }
     a {
-      width: 100%;
+      max-width: inherit;
 
       color: $white;
       text-decoration: none;
@@ -80,20 +82,40 @@
 }
 @media screen and (max-width: $max-width-md) {
   .prod {
+    align-items: center;
     width: 100%;
     img {
       width: 150px;
       height: 100px;
     }
+
     .details {
       .name {
         width: 25vw;
+        a {
+          max-width: 25vw;
+          word-wrap: break-word;
+        }
       }
     }
     .finalPrice {
       margin: 0;
       font-size: 1.2em;
       color: $lightGreen;
+    }
+  }
+}
+@media screen and (max-width: 350px) {
+  .prod {
+    img {
+      width: 100px;
+      height: 60px;
+    }
+    .qtd {
+      margin-left: 15px;
+    }
+    .details {
+      margin-left: 8px;
     }
   }
 }
