@@ -46,8 +46,8 @@ export default function CategoriesList({
                 </Link>
               </span>
             </li>
-            {categoriesList.map((categorie) => (
-              <li>
+            {categoriesList.map((categorie, i) => (
+              <li key={i}>
                 <Link
                   href={`/categories/${categorie}`}
                   onClick={() => setVisible(false)}
@@ -58,7 +58,7 @@ export default function CategoriesList({
             ))}
           </ul>
         ) : (
-          <Loading />
+          visible && <Loading />
         )}
       </div>
     </div>

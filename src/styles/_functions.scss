@@ -13,7 +13,6 @@
 @mixin setBackground($url, $size, $pos: center center, $repeat: no-repeat) {
   background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url($url);
-  // background-image: url($url);
   background-repeat: $repeat;
   background-position: $pos;
   background-size: $size;
