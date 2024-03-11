@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useCartProductsContext } from "../contexts/CartProductsContext";
 import CategoriesList from "../items/CategoriesList";
+import localFont from "next/font/local";
+const navbarFont = localFont({ src: "../TechnoCharm.otf" });
 export default function NavBar() {
   const [HeroVisible, SetHeroVisible] = useState<boolean>(true);
   const [showCatList, setShowCatList] = useState<boolean>(false);
@@ -34,7 +36,7 @@ export default function NavBar() {
   }, []);
   return (
     <header className={`${styles.navbar} ${HeroVisible && styles.hide}`}>
-      <nav>
+      <nav className={navbarFont.className}>
         <ul>
           <li>
             <Link href={"/"} onClick={() => SetHeroVisible(true)}>

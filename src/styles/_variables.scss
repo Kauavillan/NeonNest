@@ -16,14 +16,6 @@ $white: #fff;
 $black: #000;
 $blurredBlack: #00000041;
 
-// Fonts
-@font-face {
-  font-family: "Default";
-  src: url(/assets/fonts/TechnoCharm.otf) format("opentype");
-}
-
-$default: "Default";
-
 // Sizes
 $max-width-md: 1000px;
 $max-width-sm: 800px;
