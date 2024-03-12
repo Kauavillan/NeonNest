@@ -18,9 +18,7 @@ export default function Finished() {
   const { userData } = useUserDataContext();
   const windowSize = useWindowSizeContext();
   const [qtdImages, setQtdImages] = useState(1);
-  useEffect(() => {
-    console.log(justBoughtProducts);
-  }, [justBoughtProducts]);
+  useEffect(() => {}, [justBoughtProducts]);
   useEffect(() => {
     if (windowSize.width <= 650) {
       setQtdImages(1);

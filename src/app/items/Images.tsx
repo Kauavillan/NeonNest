@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default function Images({ images }: Props) {
-  const { width, height } = useWindowSizeContext();
+  const { width } = useWindowSizeContext();
 
   const [active, setActive] = useState(0);
   const [zoom, setZoom] = useState(false);

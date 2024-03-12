@@ -1,4 +1,3 @@
-"use client";
 import { Chakra_Petch } from "next/font/google";
 import "../styles/globals.scss";
 import WindowSizeProvider from "./contexts/WindowSizeContext";

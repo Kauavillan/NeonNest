@@ -1,3 +1,4 @@
+"use client";
 import { createContext, useContext, useEffect, useState } from "react";
 type UserDataTypes<T> = null | undefined | T;
 interface UserData {

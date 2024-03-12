@@ -21,7 +21,6 @@ export default function Category({ params }: { params: { category: string } }) {
       });
       if (prodsList) {
         setCategoryProds(prodsList);
-        console.log(prodsList);
       }
     }
   }, [products]);

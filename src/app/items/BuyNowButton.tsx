@@ -18,7 +18,6 @@ interface Props {
 export default function BuyNowButton({ text, color, addIds, inCart }: Props) {
   const { removeAllProducts } = useCartProductsContext();
   const { userData } = useUserDataContext();
-  console.log(userData);
   const shipmentData = useShipmentContext();
   const [warning, setWarning] = useState<boolean>(true);
   const [showWarningMessage, setShowWarningMessage] = useState<boolean>(false);

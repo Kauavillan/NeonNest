@@ -1,3 +1,4 @@
+"use client";
 import { useContext, useEffect, useState } from "react";
 import { IProduct } from "../interfaces/Products";
 import { createContext } from "react";
